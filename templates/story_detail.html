@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ story.title }} — YC Postmortem</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sticky Navbar -->
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">
+                <span class="logo-icon">▲</span>
+                <span class="logo-text">YC Postmortem</span>
+            </a>
+            <form class="nav-search" action="/" method="GET">
+                <input type="text" name="q" placeholder="Search stories..." class="search-input">
+                <button type="submit" class="search-btn">Search</button>
+            </form>
+            <div class="nav-actions">
+                <a href="/submit" class="btn btn-primary">+ Submit Story</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Story Detail -->
+    <main class="story-detail-page">
+        <div class="story-detail-container">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="/">← Back to Stories</a>
+            </div>
+
+            <!-- Story Header -->
+            <article class="story-full">
+                <div class="story-header">
+                    <div class="story-meta-row">
+                        <span class="platform-badge platform-{{ story.platform|lower|replace(' ', '-') }}">{{ story.platform }}</span>
+                        <span class="batch-badge">{{ story.batch }}</span>
+                        <span class="meta-sep">·</span>
+                        <span class="meta-text">Rejected {{ story.rejection_date }}</span>
+                        {% if story.reviewer %}
+                        <span class="meta-sep">·</span>
+                        <span class="meta-text">Reviewer: <strong>{{ story.reviewer }}</strong></span>
+                        {% endif %}
+                    </div>
+                    <h1 class="story-title">{{ story.title }}</h1>
+                    <div class="story-author-row">
+                        {% if not story.is_anonymous %}
+                        <div class="author-info">
+                            <div class="author-avatar">{{ story.founder_name[0] }}</div>
+                            <div>
+                                <span class="author-name">{{ story.founder_name }}</span>
+                                <span class="company-name">{{ story.company_name }}</span>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="author-info">
+                            <div class="author-avatar anonymous">?</div>
+                            <div>
+                                <span class="author-name">Anonymous Founder</span>
+                                <span class="company-name">{{ story.company_name }}</span>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="story-vote-block">
+                            <button class="vote-btn upvote" onclick="vote('{{ story.id }}', 'story', 'up', this)" title="Upvote">▲</button>
+                            <span class="vote-count" id="story-votes">{{ story.votes }}</span>
+                            <span class="vote-label">upvotes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rejection Reason Banner -->
+                <div class="rejection-reason-banner">
+                    <span class="reason-icon">🚫</span>
+                    <div>
+                        <span class="reason-label">Rejection Reason</span>
+                        <span class="reason-text">{{ story.rejection_reason }}</span>
+                    </div>
+                </div>
+
+                <!-- Tags -->
+                <div class="story-tags">
+                    {% for tag in story.tags %}
+                    <a href="/?tag={{ tag }}" class="tag">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+
+                <!-- Story Body -->
+                <div class="story-body prose">
+                    {% for paragraph in story.story.split('\n\n') %}
+                    <p>{{ paragraph }}</p>
+                    {% endfor %}
+                </div>
+
+                <!-- The Takeaway Box -->
+                <div class="takeaway-box">
+                    <div class="takeaway-header">
+                        <span class="takeaway-icon">💡</span>
+                        <h3>The Takeaway</h3>
+                    </div>
+                    <p class="takeaway-text">{{ story.key_learning }}</p>
+                </div>
+
+                <!-- Advice Box -->
+                <div class="advice-box">
+                    <div class="advice-header">
+                        <span class="advice-icon">🎯</span>
+                        <h3>Advice for Future Applicants</h3>
+                    </div>
+                    <p class="advice-text">{{ story.advice_for_applicants }}</p>
+                </div>
+            </article>
+
+            <!-- Discussion Section -->
+            <section class="discussion-section">
+                <h2 class="discussion-title">
+                    Discussion
+                    <span class="comment-count">({{ total_comments }} comments)</span>
+                </h2>
+
+                <!-- Comment Form -->
+                <div class="comment-form-wrapper">
+                    <div class="comment-form">
+                        <input type="text" id="comment-author" placeholder="Your name (optional)" class="comment-author-input">
+                        <textarea id="comment-text" placeholder="Share your thoughts, ask a question, or add your own experience..." class="comment-textarea" rows="3"></textarea>
+                        <div class="comment-form-actions">
+                            <button onclick="submitComment('{{ story.id }}', null)" class="btn btn-primary btn-sm">Post Comment</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comments Thread -->
+                <div class="comments-thread" id="comments-thread">
+                    {% for comment in comments %}
+                    <div class="comment" id="comment-{{ comment.id }}">
+                        <div class="comment-vote">
+                            <button class="vote-btn vote-sm upvote" onclick="vote('{{ comment.id }}', 'comment', 'up', this)" title="Upvote">▲</button>
+                            <span class="vote-count">{{ comment.votes }}</span>
+                        </div>
+                        <div class="comment-body">
+                            <div class="comment-meta">
+                                <span class="comment-author">{{ comment.author }}</span>
+                                <span class="meta-sep">·</span>
+                                <span class="comment-time">{{ comment.created_at[:10] }}</span>
+                            </div>
+                            <p class="comment-text">{{ comment.text }}</p>
+                            <div class="comment-actions">
+                                <button class="reply-btn" onclick="showReplyForm('{{ comment.id }}', '{{ story.id }}')">↩ Reply</button>
+                            </div>
+                            <!-- Reply form placeholder -->
+                            <div class="reply-form-container" id="reply-form-{{ comment.id }}"></div>
+
+                            <!-- Nested Replies -->
+                            {% set replies = get_replies(comment.id) %}
+                            {% if replies %}
+                            <div class="comment-replies">
+                                {% for reply in replies %}
+                                <div class="comment reply" id="comment-{{ reply.id }}">
+                                    <div class="comment-vote">
+                                        <button class="vote-btn vote-sm upvote" onclick="vote('{{ reply.id }}', 'comment', 'up', this)" title="Upvote">▲</button>
+                                        <span class="vote-count">{{ reply.votes }}</span>
+                                    </div>
+                                    <div class="comment-body">
+                                        <div class="comment-meta">
+                                            <span class="comment-author">{{ reply.author }}</span>
+                                            <span class="meta-sep">·</span>
+                                            <span class="comment-time">{{ reply.created_at[:10] }}</span>
+                                        </div>
+                                        <p class="comment-text">{{ reply.text }}</p>
+                                        <div class="comment-actions">
+                                            <button class="reply-btn" onclick="showReplyForm('{{ reply.id }}', '{{ story.id }}')">↩ Reply</button>
+                                        </div>
+                                        <div class="reply-form-container" id="reply-form-{{ reply.id }}"></div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    {% if not comments %}
+                    <div class="empty-comments">
+                        <p>No comments yet. Be the first to share your thoughts!</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <p>YC Postmortem — Learning from rejection, one story at a time.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

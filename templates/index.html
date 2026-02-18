@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YC Postmortem — Learn from Rejection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sticky Navbar -->
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">
+                <span class="logo-icon">▲</span>
+                <span class="logo-text">YC Postmortem</span>
+            </a>
+            <form class="nav-search" action="/" method="GET">
+                <input type="text" name="q" placeholder="Search stories, founders, companies..." value="{{ search_query }}" class="search-input">
+                <button type="submit" class="search-btn">Search</button>
+            </form>
+            <div class="nav-actions">
+                <a href="/submit" class="btn btn-primary">+ Submit Story</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    {% if not search_query and not platform_filter and not tag_filter and not batch_filter %}
+    <section class="hero">
+        <div class="hero-inner">
+            <h1>Learn from the <span class="highlight">"No"</span></h1>
+            <p class="hero-subtitle">Real rejection stories from founders who applied to YC, Techstars, 500 Startups, and more. The post-game analysis the startup world needs.</p>
+            <p class="hero-subtitle">Every rejection is a lesson. Founders share their YC rejection reasons and what they'd tell future applicants to do differently.</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">{{ total_stories }}</span>
+                    <span class="stat-label">Stories Shared</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">Platforms</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">{{ all_tags|length }}</span>
+                    <span class="stat-label">Categories</span>
+                </div>
+            </div>
+            <a href="#stories-feed" class="btn btn-hero">Browse Stories ↓</a>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Main Content -->
+    <main class="main-content" id="stories-feed">
+        <div class="content-grid">
+            <!-- Feed Column -->
+            <div class="feed-column">
+                <!-- Sort & Filter Bar -->
+                <div class="feed-header">
+                    <div class="sort-tabs">
+                        <a href="/?sort=top{% if platform_filter %}&platform={{ platform_filter }}{% endif %}{% if tag_filter %}&tag={{ tag_filter }}{% endif %}{% if batch_filter %}&batch={{ batch_filter }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}" class="sort-tab {% if sort == 'top' %}active{% endif %}">🔥 Top</a>
+                        <a href="/?sort=new{% if platform_filter %}&platform={{ platform_filter }}{% endif %}{% if tag_filter %}&tag={{ tag_filter }}{% endif %}{% if batch_filter %}&batch={{ batch_filter }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}" class="sort-tab {% if sort == 'new' %}active{% endif %}">🕐 New</a>
+                    </div>
+                    {% if platform_filter or tag_filter or batch_filter or search_query %}
+                    <div class="active-filters">
+                        {% if search_query %}<span class="filter-chip">Search: "{{ search_query }}" <a href="/?sort={{ sort }}{% if platform_filter %}&platform={{ platform_filter }}{% endif %}{% if tag_filter %}&tag={{ tag_filter }}{% endif %}{% if batch_filter %}&batch={{ batch_filter }}{% endif %}">×</a></span>{% endif %}
+                        {% if platform_filter %}<span class="filter-chip">{{ platform_filter }} <a href="/?sort={{ sort }}{% if tag_filter %}&tag={{ tag_filter }}{% endif %}{% if batch_filter %}&batch={{ batch_filter }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">×</a></span>{% endif %}
+                        {% if tag_filter %}<span class="filter-chip">{{ tag_filter }} <a href="/?sort={{ sort }}{% if platform_filter %}&platform={{ platform_filter }}{% endif %}{% if batch_filter %}&batch={{ batch_filter }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">×</a></span>{% endif %}
+                        {% if batch_filter %}<span class="filter-chip">{{ batch_filter }} <a href="/?sort={{ sort }}{% if platform_filter %}&platform={{ platform_filter }}{% endif %}{% if tag_filter %}&tag={{ tag_filter }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">×</a></span>{% endif %}
+                        <a href="/" class="clear-all">Clear all</a>
+                    </div>
+                    {% endif %}
+                    <span class="results-count">{{ stories|length }} stories</span>
+                </div>
+
+                <!-- Story Cards -->
+                {% if stories %}
+                {% for story in stories %}
+                <article class="story-card" data-id="{{ story.id }}">
+                    <div class="card-vote">
+                        <button class="vote-btn upvote" onclick="vote('{{ story.id }}', 'story', 'up', this)" title="Upvote">▲</button>
+                        <span class="vote-count">{{ story.votes }}</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span class="platform-badge platform-{{ story.platform|lower|replace(' ', '-') }}">{{ story.platform }}</span>
+                            <span class="batch-badge">{{ story.batch }}</span>
+                            <span class="meta-sep">·</span>
+                            <span class="meta-text">{{ story.rejection_date }}</span>
+                            {% if not story.is_anonymous %}
+                            <span class="meta-sep">·</span>
+                            <span class="meta-text">by <strong>{{ story.founder_name }}</strong></span>
+                            {% else %}
+                            <span class="meta-sep">·</span>
+                            <span class="meta-text anonymous-badge">Anonymous</span>
+                            {% endif %}
+                        </div>
+                        <h2 class="card-title">
+                            <a href="/story/{{ story.id }}">{{ story.title }}</a>
+                        </h2>
+                        <div class="card-reason">
+                            <span class="reason-label">Reason:</span> {{ story.rejection_reason }}
+                        </div>
+                        <div class="card-tags">
+                            {% for tag in story.tags %}
+                            <a href="/?tag={{ tag }}" class="tag">{{ tag }}</a>
+                            {% endfor %}
+                        </div>
+                        <div class="card-learning">
+                            <div class="learning-icon">💡</div>
+                            <div class="learning-text">
+                                <strong>Key Learning:</strong> {{ story.key_learning[:200] }}{% if story.key_learning|length > 200 %}...{% endif %}
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="/story/{{ story.id }}" class="read-more">Read full story →</a>
+                            <span class="meta-text">{{ story.company_name }}</span>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+                {% else %}
+                <div class="empty-state">
+                    <div class="empty-icon">📭</div>
+                    <h3>No stories found</h3>
+                    <p>Try adjusting your filters or <a href="/">view all stories</a>.</p>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- About Widget -->
+                <div class="sidebar-widget about-widget">
+                    <h3>About YC Postmortem</h3>
+                    <p>A community for founders to share their accelerator rejection stories and help future applicants learn from the "no."</p>
+                    <a href="/submit" class="btn btn-primary btn-block">Share Your Story</a>
+                </div>
+
+                <!-- Common Rejection Reasons -->
+                <div class="sidebar-widget">
+                    <h3>Common Rejection Reasons</h3>
+                    <div class="reason-stats">
+                        {% for stat in reason_stats[:8] %}
+                        <div class="reason-stat-row">
+                            <span class="reason-stat-label">{{ stat.reason }}</span>
+                            <div class="reason-stat-bar">
+                                <div class="reason-stat-fill" style="width: {{ stat.percent }}%"></div>
+                            </div>
+                            <span class="reason-stat-count">{{ stat.count }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Filter by Platform -->
+                <div class="sidebar-widget">
+                    <h3>Platforms</h3>
+                    <div class="filter-list">
+                        {% for platform, count in platform_stats.items() %}
+                        <a href="/?platform={{ platform }}&sort={{ sort }}" class="filter-item {% if platform_filter == platform %}active{% endif %}">
+                            <span>{{ platform }}</span>
+                            <span class="filter-count">{{ count }}</span>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Filter by Tags -->
+                <div class="sidebar-widget">
+                    <h3>Categories</h3>
+                    <div class="tag-cloud">
+                        {% for tag in all_tags %}
+                        <a href="/?tag={{ tag }}&sort={{ sort }}" class="tag {% if tag_filter == tag %}active{% endif %}">{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Filter by Batch -->
+                <div class="sidebar-widget">
+                    <h3>Batches</h3>
+                    <div class="filter-list compact">
+                        {% for batch in all_batches[:10] %}
+                        <a href="/?batch={{ batch }}&sort={{ sort }}" class="filter-item {% if batch_filter == batch %}active{% endif %}">
+                            {{ batch }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <p>YC Postmortem — Learning from rejection, one story at a time.</p>
+            <p class="footer-note">This is a community project. All stories are shared voluntarily by founders.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

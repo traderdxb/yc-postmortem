@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Your Story — YC Postmortem</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sticky Navbar -->
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">
+                <span class="logo-icon">▲</span>
+                <span class="logo-text">YC Postmortem</span>
+            </a>
+            <div class="nav-actions">
+                <a href="/" class="btn btn-ghost">← Back to Feed</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="submit-page">
+        <div class="submit-container">
+            <div class="submit-header">
+                <h1>Share Your Rejection Story</h1>
+                <p class="submit-subtitle">Your experience could help the next founder avoid the same mistakes. Be honest, be specific, and focus on what you learned.</p>
+            </div>
+
+            <form action="/submit" method="POST" class="submit-form" id="submit-form">
+                <!-- Section: Context -->
+                <div class="form-section">
+                    <h2 class="section-title">📋 Context</h2>
+                    <p class="section-desc">Basic information about your application.</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="platform">Platform / Accelerator *</label>
+                            <select name="platform" id="platform" required>
+                                <option value="">Select...</option>
+                                <option value="Y Combinator">Y Combinator</option>
+                                <option value="Techstars">Techstars</option>
+                                <option value="500 Startups">500 Startups</option>
+                                <option value="a16z">a16z</option>
+                                <option value="Sequoia">Sequoia</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="batch">Batch / Program</label>
+                            <input type="text" name="batch" id="batch" placeholder="e.g., W2024, S2023, Boulder 2023">
+                            <span class="form-hint">The specific batch or program you applied to</span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="rejection_date">Rejection Date</label>
+                            <input type="date" name="rejection_date" id="rejection_date">
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewer">Reviewer / Interviewer</label>
+                            <input type="text" name="reviewer" id="reviewer" placeholder="e.g., Michael Seibel, Interview Panel">
+                            <span class="form-hint">Who reviewed your application or conducted the interview?</span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <input type="text" name="category" id="category" placeholder="e.g., AI, Fintech, Healthcare">
+                        </div>
+                        <div class="form-group">
+                            <label for="tags">Tags</label>
+                            <input type="text" name="tags" id="tags" placeholder="e.g., AI, Solo Founder, No Traction">
+                            <span class="form-hint">Comma-separated tags to help others find your story</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section: The Postmortem -->
+                <div class="form-section">
+                    <h2 class="section-title">📝 The Postmortem</h2>
+                    <p class="section-desc">Tell your story. Be specific — the details are what make these stories valuable.</p>
+
+                    <div class="form-group">
+                        <label for="title">Title *</label>
+                        <input type="text" name="title" id="title" required placeholder="e.g., 'YC rejected our AI startup because we had no paying customers'">
+                        <span class="form-hint">Write a clear, descriptive title that captures the essence of your rejection</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rejection_reason">Rejection Reason *</label>
+                        <input type="text" name="rejection_reason" id="rejection_reason" required placeholder="e.g., 'No clear competitive advantage in crowded market'">
+                        <span class="form-hint">The core reason you were rejected (as stated or implied)</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="story">Your Story *</label>
+                        <textarea name="story" id="story" required rows="10" placeholder="Tell us what happened. What was your product? What was the interview like? What specific feedback did you receive? Don't just paste the rejection email — give us the full context."></textarea>
+                        <span class="form-hint">Be specific about the interview, the questions asked, and the feedback received. The more detail, the more helpful.</span>
+                    </div>
+                </div>
+
+                <!-- Section: The Learning (highlighted) -->
+                <div class="form-section learning-section">
+                    <h2 class="section-title">💡 The Key Learning</h2>
+                    <p class="section-desc">This is the most valuable part of your post. What did you learn, and what would you tell future applicants?</p>
+
+                    <div class="form-group">
+                        <label for="key_learning">What did you learn? *</label>
+                        <textarea name="key_learning" id="key_learning" required rows="5" placeholder="Looking back, what was the real lesson? What would you do differently if you could apply again?"></textarea>
+                        <span class="form-hint">This will be highlighted in your post as "The Takeaway"</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="advice_for_applicants">Advice for future applicants</label>
+                        <textarea name="advice_for_applicants" id="advice_for_applicants" rows="4" placeholder="What specific, actionable advice would you give to someone applying to this program?"></textarea>
+                        <span class="form-hint">Be specific and actionable. "Work harder" isn't helpful. "Get 5 paying customers before you apply" is.</span>
+                    </div>
+                </div>
+
+                <!-- Section: Identity -->
+                <div class="form-section identity-section">
+                    <h2 class="section-title">👤 Your Identity</h2>
+
+                    <div class="form-row" id="identity-fields">
+                        <div class="form-group">
+                            <label for="founder_name">Your Name</label>
+                            <input type="text" name="founder_name" id="founder_name" placeholder="Your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="company_name">Company Name</label>
+                            <input type="text" name="company_name" id="company_name" placeholder="Your startup's name">
+                        </div>
+                    </div>
+
+                    <div class="anonymity-toggle">
+                        <label class="toggle-label">
+                            <input type="checkbox" name="is_anonymous" id="is_anonymous">
+                            <span class="toggle-switch"></span>
+                            <span class="toggle-text">
+                                <strong>Post Anonymously</strong>
+                                <span class="toggle-desc">Your name and company will be hidden. We encourage honesty — anonymous posts are totally fine.</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-lg">🚀 Publish Your Postmortem</button>
+                    <p class="form-disclaimer">By posting, you confirm this is your own experience and you have the right to share it.</p>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <p>YC Postmortem — Learning from rejection, one story at a time.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

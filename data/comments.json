@@ -1,0 +1,137 @@
+[
+  {
+    "id": "c001",
+    "story_id": "s001",
+    "author": "TechFounder42",
+    "text": "This resonates so much. I had the exact same experience — 500 free users, zero willingness to pay. The 'would you pay for this?' conversation is terrifying but essential.",
+    "parent_id": null,
+    "votes": 34,
+    "created_at": "2024-01-06T10:00:00Z"
+  },
+  {
+    "id": "c002",
+    "story_id": "s001",
+    "author": "StartupSarah",
+    "text": "Counterpoint: some products genuinely need scale before monetization (social networks, marketplaces). But for B2B SaaS? Yeah, charge from day one.",
+    "parent_id": "c001",
+    "votes": 21,
+    "created_at": "2024-01-06T11:30:00Z"
+  },
+  {
+    "id": "c003",
+    "story_id": "s001",
+    "author": "YCAlum2022",
+    "text": "YC alum here. Can confirm Michael asks this question to almost everyone. Have your revenue story ready.",
+    "parent_id": null,
+    "votes": 45,
+    "created_at": "2024-01-06T14:00:00Z"
+  },
+  {
+    "id": "c004",
+    "story_id": "s003",
+    "author": "FintechVet",
+    "text": "The 'I've seen this exact pitch 12 times this batch' line is brutal but honest. Do your research on what YC has already funded.",
+    "parent_id": null,
+    "votes": 28,
+    "created_at": "2023-02-19T09:00:00Z"
+  },
+  {
+    "id": "c005",
+    "story_id": "s003",
+    "author": "NeobankerAnon",
+    "text": "We got the same feedback. Ended up pivoting to embedded finance for vertical SaaS companies. Much better positioning.",
+    "parent_id": "c004",
+    "votes": 15,
+    "created_at": "2023-02-19T12:00:00Z"
+  },
+  {
+    "id": "c006",
+    "story_id": "s004",
+    "author": "PGFanboy",
+    "text": "PG's 'walk me through the math' is legendary. He can do market sizing in his head faster than most people can with a spreadsheet.",
+    "parent_id": null,
+    "votes": 56,
+    "created_at": "2024-05-23T08:00:00Z"
+  },
+  {
+    "id": "c007",
+    "story_id": "s004",
+    "author": "EdTechFounder",
+    "text": "The pivot to AI-powered code review is smart. Same domain expertise, much bigger market. Sometimes rejection is redirection.",
+    "parent_id": null,
+    "votes": 38,
+    "created_at": "2024-05-23T10:30:00Z"
+  },
+  {
+    "id": "c008",
+    "story_id": "s004",
+    "author": "SoloFounderLife",
+    "text": "As a solo founder, this scares me. How do you honestly assess market size when you're emotionally invested in the idea?",
+    "parent_id": "c006",
+    "votes": 22,
+    "created_at": "2024-05-23T14:00:00Z"
+  },
+  {
+    "id": "c009",
+    "story_id": "s016",
+    "author": "AISkeptic",
+    "text": "'You're renting your core technology from someone who could become your competitor tomorrow.' This should be printed on every AI startup's wall.",
+    "parent_id": null,
+    "votes": 89,
+    "created_at": "2024-01-26T09:00:00Z"
+  },
+  {
+    "id": "c010",
+    "story_id": "s016",
+    "author": "GPTWrapper101",
+    "text": "Guilty as charged. We pivoted to fine-tuning our own models on proprietary educational data. It's harder but defensible.",
+    "parent_id": "c009",
+    "votes": 34,
+    "created_at": "2024-01-26T11:00:00Z"
+  },
+  {
+    "id": "c011",
+    "story_id": "s017",
+    "author": "CofounderTherapy",
+    "text": "The cofounder alignment issue is SO common and SO underrated. We do 'alignment sessions' every Sunday night before big meetings now.",
+    "parent_id": null,
+    "votes": 42,
+    "created_at": "2024-06-11T08:00:00Z"
+  },
+  {
+    "id": "c012",
+    "story_id": "s017",
+    "author": "SerialFounder",
+    "text": "On my third startup. The #1 reason my first two failed was cofounder misalignment. Now I spend a month on a 'cofounder prenup' before starting anything.",
+    "parent_id": "c011",
+    "votes": 31,
+    "created_at": "2024-06-11T10:00:00Z"
+  },
+  {
+    "id": "c013",
+    "story_id": "s026",
+    "author": "ProblemFirst",
+    "text": "PG's quote about being 'obsessed with a problem, not a technology' is the best startup advice I've ever heard. Printing this out.",
+    "parent_id": null,
+    "votes": 67,
+    "created_at": "2024-06-26T09:00:00Z"
+  },
+  {
+    "id": "c014",
+    "story_id": "s026",
+    "author": "AgentBuilder",
+    "text": "I'm building an AI agent startup and this post made me completely rethink my pitch. Thank you for sharing.",
+    "parent_id": null,
+    "votes": 23,
+    "created_at": "2024-06-26T12:00:00Z"
+  },
+  {
+    "id": "c015",
+    "story_id": "s050",
+    "author": "FocusedFounder",
+    "text": "'Come back when you've picked a side' — PG dropping wisdom bombs as usual. Focus is the hardest thing for ambitious founders.",
+    "parent_id": null,
+    "votes": 45,
+    "created_at": "2024-01-21T10:00:00Z"
+  }
+]
