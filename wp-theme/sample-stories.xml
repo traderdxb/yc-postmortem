@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0"
+	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:wp="http://wordpress.org/export/1.2/"
+>
+<channel>
+	<title>YC Postmortem</title>
+	<link>https://yc-postmortem.com</link>
+	<description>Real rejection stories from founders who applied to YC, Techstars, 500 Startups, and more.</description>
+	<pubDate>Wed, 18 Feb 2026 12:00:00 +0000</pubDate>
+	<language>en-US</language>
+	<wp:wxr_version>1.2</wp:wxr_version>
+	<wp:base_site_url>https://wordpress.org</wp:base_site_url>
+	<wp:base_blog_url>https://yc-postmortem.com</wp:base_blog_url>
+	
+	<item>
+		<title>No Clear Path to $100M</title>
+		<link>https://yc-postmortem.com/stories/no-clear-path-100m/</link>
+		<pubDate>Tue, 10 Feb 2026 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[founder1]]></dc:creator>
+		<guid isPermaLink="false">https://yc-postmortem.com/?post_type=story&#038;p=1</guid>
+		<description></description>
+		<content:encoded><![CDATA[Our startup was building an AI-powered code review tool. We had 500 signups and $10k MRR. But theYC partner said we didn't show a clear path to $100M revenue. They wanted to see a bigger market opportunity.
+
+We learned that even with traction, you need to articulate a massive TAM. They weren't convinced our niche was big enough to become a billion-dollar company.
+
+What I'd tell future applicants: Show a clear 10x better solution and prove you can capture a large market. Don't just show product traction - show market potential.]]></content:encoded>
+		<excerpt:encoded><![CDATA[Our startup was building an AI-powered code review tool. We had 500 signups and $10k MRR. But theYC partner said we didn't show a clear path to $100M revenue.]]></excerpt:encoded>
+		<wp:post_id>1</wp:post_id>
+		<wp:post_date>2026-02-10 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2026-02-10 10:00:00</wp:post_date_gmt>
+		<wp:comment_status>open</wp:comment_status>
+		<wp:ping_status>open</wp:ping_status>
+		<wp:post_name>no-clear-path-100m</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>story</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="platform" nicename="yc"><![CDATA[YC]]></category>
+		<category domain="batch" nicename="w26"><![CDATA[W26]]></category>
+		<wp:postmeta>
+			<wp:meta_key>company_name</wp:meta_key>
+			<wp:meta_value><![CDATA[CodeReview AI]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>rejection_reason</wp:meta_key>
+			<wp:meta_value><![CDATA[No clear path to $100M revenue]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>votes</wp:meta_key>
+			<wp:meta_value><![CDATA[42]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+	
+	<item>
+		<title>Team Was Too Junior</title>
+		<link>https://yc-postmortem.com/stories/team-too-junior/</link>
+		<pubDate>Mon, 09 Feb 2026 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[founder2]]></dc:creator>
+		<guid isPermaLink="false">https://yc-postmortem.com/?post_type=story&#038;p=2</guid>
+		<description></description>
+		<content:encoded><![CDATA[We had a solid idea for a B2B SaaS platform. Our pitch deck was clean and our idea was well-validated. But the interview focused heavily on our team composition.
+
+The partner told us our team was "too junior" - we were first-time founders without prior exits. They wanted to see experienced operators who had built and scaled companies before.
+
+What I'd tell future applicants: Either have a co-founder with a strong background or show evidence of rapid learning and execution. Consider bringing on an advisor with domain expertise.]]></content:encoded>
+		<excerpt:encoded><![CDATA[We had a solid idea for a B2B SaaS platform. But the interview focused heavily on our team composition. The partner told us our team was "too junior".]]></excerpt:encoded>
+		<wp:post_id>2</wp:post_id>
+		<wp:post_date>2026-02-09 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2026-02-09 10:00:00</wp:post_date_gmt>
+		<wp:comment_status>open</wp:comment_status>
+		<wp:ping_status>open</wp:ping_status>
+		<wp:post_name>team-too-junior</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>story</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="platform" nicename="yc"><![CDATA[YC]]></category>
+		<category domain="batch" nicename="w26"><![CDATA[W26]]></category>
+		<wp:postmeta>
+			<wp:meta_key>company_name</wp:meta_key>
+			<wp:meta_value><![CDATA[PipelinePro]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>rejection_reason</wp:meta_key>
+			<wp:meta_value><![CDATA[Team was too junior - first-time founders]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>votes</wp:meta_key>
+			<wp:meta_value><![CDATA[38]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+	
+	<item>
+		<title>Not a Big Enough Problem</title>
+		<link>https://yc-postmortem.com/stories/not-big-enough-problem/</link>
+		<pubDate>Sun, 08 Feb 2026 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[founder3]]></dc:creator>
+		<guid isPermaLink="false">https://yc-postmortem.com/?post_type=story&#038;p=3</guid>
+		<description></description>
+		<content:encoded><![CDATA[We were building a tool for freelance graphic designers to manage their invoices and contracts. It was a real pain point we understood deeply. We had 1,000 paying customers.
+
+But theYC partner said the problem wasn't big enough. They wanted to see founders tackling problems that affected millions of people, not a niche of ~10 million freelancers.
+
+What I'd tell future applicants: Choose a problem that affects a massive market. Even if your initial niche is smaller, show how you can expand into adjacent markets.]]></content:encoded>
+		<excerpt:encoded><![CDATA[We were building a tool for freelance graphic designers. But theYC partner said the problem wasn't big enough - they wanted problems affecting millions.]]></excerpt:encoded>
+		<wp:post_id>3</wp:post_id>
+		<wp:post_date>2026-02-08 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2026-02-08 10:00:00</wp:post_date_gmt>
+		<wp:comment_status>open</wp:comment_status>
+		<wp:ping_status>open</wp:ping_status>
+		<wp:post_name>not-big-enough-problem</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>story</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="platform" nicename="yc"><![CDATA[YC]]></category>
+		<category domain="batch" nicename="w25"><![CDATA[W25]]></category>
+		<wp:postmeta>
+			<wp:meta_key>company_name</wp:meta_key>
+			<wp:meta_value><![CDATA[FreelanceFlow]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>rejection_reason</wp:meta_key>
+			<wp:meta_value><![CDATA[Not a big enough problem - too niche]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>votes</wp:meta_key>
+			<wp:meta_value><![CDATA[56]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+	
+	<item>
+		<title>Timing Was Off</title>
+		<link>https://yc-postmortem.com/stories/timing-was-off/</link>
+		<pubDate>Sat, 07 Feb 2026 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[founder4]]></dc:creator>
+		<guid isPermaLink="false">https://yc-postmortem.com/?post_type=story&#038;p=4</guid>
+		<description></description>
+		<content:encoded><![CDATA[We were building an AI-powered legal document analyzer. The space is now hot, but when we applied, it was too early. The market wasn't ready for AI legal tools.
+
+The partner said we were "early to the market" - a polite way of saying they'd pass. They wanted to see more market validation before investing.
+
+What I'd tell future applicants: Timing matters. If you're too early, show why the market is about to shift. Bring data or customer signals that validate the timing.]]></content:encoded>
+		<excerpt:encoded><![CDATA[We were building an AI-powered legal document analyzer. When we applied, it was too early. The partner said we were "early to the market".]]></excerpt:encoded>
+		<wp:post_id>4</wp:post_id>
+		<wp:post_date>2026-02-07 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2026-02-07 10:00:00</wp:post_date_gmt>
+		<wp:comment_status>open</wp:comment_status>
+		<wp:ping_status>open</wp:ping_status>
+		<wp:post_name>timing-was-off</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>story</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="platform" nicename="techstars"><![CDATA[Techstars]]></category>
+		<category domain="batch" nicename="2024"><![CDATA[2024]]></category>
+		<wp:postmeta>
+			<wp:meta_key>company_name</wp:meta_key>
+			<wp:meta_value><![CDATA[LegalAI]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>rejection_reason</wp:meta_key>
+			<wp:meta_value><![CDATA[Timing was off - too early for the market]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>votes</wp:meta_key>
+			<wp:meta_value><![CDATA[31]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+	
+	<item>
+		<title>Crowded Space with No Differentiation</title>
+		<link>https://yc-postmortem.com/stories/crowded-space/</link>
+		<pubDate>Fri, 06 Feb 2026 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[founder5]]></dc:creator>
+		<guid isPermaLink="false">https://yc-postmortem.com/?post_type=story&#038;p=5</guid>
+		<description></description>
+		<content:encoded><![CDATA[We were building a meal planning app. Seems like every startup is building something in the food space. We had 10k users but it was hard to stand out.
+
+The partner asked "Why you and not the 50 other meal planning apps?" We didn't have a good answer. Our differentiation was weak.
+
+What I'd tell future applicants: Know your competitors inside out. Be able to articulate exactly why you're 10x better, not just slightly better. Show defensibility.]]></content:encoded>
+		<excerpt:encoded><![CDATA[We were building a meal planning app. The partner asked "Why you and not the 50 other meal planning apps?" We didn't have a good answer.]]></excerpt:encoded>
+		<wp:post_id>5</wp:post_id>
+		<wp:post_date>2026-02-06 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2026-02-06 10:00:00</wp:post_date_gmt>
+		<wp:comment_status>open</wp:comment_status>
+		<wp:ping_status>open</wp:ping_status>
+		<wp:post_name>crowded-space</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>story</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="platform" nicename="500-startups"><![CDATA[500 Startups]]></category>
+		<category domain="batch" nicename="2024"><![CDATA[2024]]></category>
+		<wp:postmeta>
+			<wp:meta_key>company_name</wp:meta_key>
+			<wp:meta_value><![CDATA[MealMate]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>rejection_reason</wp:meta_key>
+			<wp:meta_value><![CDATA[Crowded space with no clear differentiation]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>votes</wp:meta_key>
+			<wp:meta_value><![CDATA[28]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+</channel>
+</rss>
