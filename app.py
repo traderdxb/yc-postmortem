@@ -2,15 +2,60 @@ import os
 import json
 import uuid
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify, redirect, url_for, abort
+from flask import Flask, render_template, request, redirect, url_for, jsonify, flash, abort
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
+app.secret_key = os.environ.get('SECRET_KEY', os.urandom(24))
+
+# Flask-Login setup
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
 STORIES_FILE = os.path.join(DATA_DIR, 'stories.json')
 COMMENTS_FILE = os.path.join(DATA_DIR, 'comments.json')
+USERS_FILE = os.path.join(DATA_DIR, 'users.json')
 
 os.makedirs(DATA_DIR, exist_ok=True)
+
+
+class User(UserMixin):
+    def __init__(self, id, username, password_hash):
+        self.id = id
+        self.username = username
+        self.password_hash = password_hash
+
+
+def load_users():
+    return load_json(USERS_FILE, {})
+
+
+def save_users(users):
+    save_json(USERS_FILE, users)
+
+
+def get_user_by_username(username):
+    users = load_users()
+    for user_id, user_data in users.items():
+        if user_data['username'] == username:
+            return User(user_id, user_data['username'], user_data['password_hash'])
+    return None
+
+
+def get_user_by_id(user_id):
+    users = load_users()
+    if user_id in users:
+        user_data = users[user_id]
+        return User(user_id, user_data['username'], user_data['password_hash'])
+    return None
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return get_user_by_id(user_id)
 
 
 def load_json(filepath, default=None):
@@ -105,6 +150,58 @@ def get_all_batches(stories):
 
 # ─── Routes ───────────────────────────────────────────────────────────────────
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    if request.method == 'POST':
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '')
+        if not username or not password:
+            flash('Username and password are required', 'error')
+            return redirect(url_for('register'))
+        if len(password) < 6:
+            flash('Password must be at least 6 characters', 'error')
+            return redirect(url_for('register'))
+        existing_user = get_user_by_username(username)
+        if existing_user:
+            flash('Username already exists', 'error')
+            return redirect(url_for('register'))
+        users = load_users()
+        user_id = str(uuid.uuid4())
+        users[user_id] = {
+            'username': username,
+            'password_hash': generate_password_hash(password)
+        }
+        save_users(users)
+        flash('Registration successful! Please log in.', 'success')
+        return redirect(url_for('login'))
+    return render_template('register.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    if request.method == 'POST':
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '')
+        user = get_user_by_username(username)
+        if user and check_password_hash(user.password_hash, password):
+            login_user(user)
+            next_page = request.args.get('next')
+            return redirect(next_page or url_for('index'))
+        flash('Invalid username or password', 'error')
+    return render_template('login.html')
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out', 'success')
+    return redirect(url_for('index'))
+
 @app.route('/')
 def index():
     stories = seed_if_needed()
@@ -184,6 +281,7 @@ def story_detail(story_id):
 
 
 @app.route('/submit', methods=['GET', 'POST'])
+@login_required
 def submit_story():
     if request.method == 'GET':
         return render_template('submit.html')

@@ -21,7 +21,14 @@
                 <button type="submit" class="search-btn">Search</button>
             </form>
             <div class="nav-actions">
-                <a href="/submit" class="btn btn-primary">+ Submit Story</a>
+                {% if current_user.is_authenticated %}
+                    <span style="margin-right: 1rem; color: var(--text-secondary);">Hello, {{ current_user.username }}</span>
+                    <a href="/logout" class="btn btn-ghost">Logout</a>
+                    <a href="/submit" class="btn btn-primary">+ Submit Story</a>
+                {% else %}
+                    <a href="/login" class="btn btn-ghost">Log In</a>
+                    <a href="/register" class="btn btn-primary">Sign Up</a>
+                {% endif %}
             </div>
         </div>
     </nav>
