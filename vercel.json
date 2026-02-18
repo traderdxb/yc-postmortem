@@ -1,0 +1,41 @@
+{
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxDuration": 30
+      }
+    },
+    {
+      "src": "templates/",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "static/",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "data/",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/api/vote",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/api/comment",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.py"
+    }
+  ]
+}
